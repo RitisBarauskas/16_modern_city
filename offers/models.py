@@ -32,7 +32,7 @@ class Region(Model):
 class City(Model):
     name = CharField(max_length=MAX_LENGTH_CHAR_FIELD, verbose_name='Название города')
     population = IntegerField(verbose_name='Население', default=0)
-    region = ForeignKey(Region, on_delete=CASCADE, verbose_name='Регион')
+    region = ForeignKey(Region, on_delete=CASCADE, verbose_name='Регион', related_name='cities')
 
     class Meta:
         verbose_name_plural = 'Города'
@@ -59,12 +59,12 @@ class Tag(Model):
 class Offer(Model):
     name = CharField(max_length=MAX_LENGTH_CHAR_FIELD, verbose_name='Название предложения')
     description = CharField(max_length=1000, verbose_name='Описание')
-    city = ForeignKey(City, on_delete=CASCADE, verbose_name='Город')
+    city = ForeignKey(City, on_delete=CASCADE, verbose_name='Город', related_name='offers')
     tags = ManyToManyField(Tag, verbose_name='Теги')
     created_at = DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = DateTimeField(auto_now=True, verbose_name='Дата обновления')
     expired_at = DateTimeField(verbose_name='Дата окончания')
-    author = ForeignKey(Profile, on_delete=CASCADE, verbose_name='Автор')
+    author = ForeignKey(Profile, on_delete=CASCADE, verbose_name='Автор', related_name='offers')
 
     class Meta:
         verbose_name_plural = 'Предложения'
@@ -77,7 +77,7 @@ class Offer(Model):
 
 class Comment(Model):
     text = CharField(max_length=1000, verbose_name='Текст комментария')
-    offer = ForeignKey(Offer, on_delete=CASCADE, verbose_name='Предложение')
+    offer = ForeignKey(Offer, on_delete=CASCADE, verbose_name='Предложение', related_name='comments')
     author = ForeignKey(Profile, on_delete=CASCADE, verbose_name='Автор')
     created_at = DateTimeField(auto_now_add=True, verbose_name='Дата создания')
 
@@ -91,8 +91,8 @@ class Comment(Model):
 
 
 class Like(Model):
-    author = ForeignKey(Profile, on_delete=CASCADE, verbose_name='Автор')
-    offer = ForeignKey(Offer, on_delete=CASCADE, verbose_name='Предложение')
+    author = ForeignKey(Profile, on_delete=CASCADE, verbose_name='Автор', related_name='likes')
+    offer = ForeignKey(Offer, on_delete=CASCADE, verbose_name='Предложение', related_name='likes')
     created_at = DateTimeField(auto_now_add=True, verbose_name='Дата создания')
 
     class Meta:

@@ -1,0 +1,17 @@
+<header>
+    <nav class="d-flex justify-content-between">
+        <ul class="list-group list-group-horizontal-sm">
+            <li class="list-group-item"><a href="{% url 'offers:index' %}">Главная</a></li>
+            <li class="list-group-item"><a href="{% url 'offers:cities' %}">Города</a></li>
+        </ul>
+        <ul class="list-group list-group-horizontal-sm">
+        {% if user.is_authenticated %}
+            <li class="list-group-item">
+
+            </li>
+        {% else %}
+            <li class="list-group-item"><a href="">Зарегистрироваться</a></li>
+        {% endif %}
+        </ul>
+    </nav>
+</header>

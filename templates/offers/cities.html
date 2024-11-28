@@ -1,0 +1,14 @@
+{% extends 'extends/base.html' %}
+
+{% block title %}Города на Modern City{% endblock %}
+
+{% block header %}Города на Modern City{% endblock %}
+
+{% block content %}
+    <ul>
+        {% for city in cities %}
+            <li>{{ city.name }} ({{ city.region.name }}) - всего предложений: {{ city.offers.count }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
