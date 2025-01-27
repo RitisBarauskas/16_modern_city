@@ -29,6 +29,19 @@ class Region(Model):
         return self.name
 
 
+class Review(Model):
+    title = CharField(verbose_name='Заголовок', max_length=MAX_LENGTH_CHAR_FIELD)
+    slug = SlugField(verbose_name='Слаг', max_length=MAX_LENGTH_SLUG_FIELD)
+
+    class Meta:
+        verbose_name_plural = 'Отзывы'
+        verbose_name = 'Отзыв'
+        ordering = ['title']
+
+    def __str__(self):
+        return self.title
+
+
 class Catalog(Model):
     pass
 
@@ -109,9 +122,3 @@ class Like(Model):
 
     def __str__(self):
         return f'{self.author} - {self.offer}'
-from django.db.models import Model
-
-
-class Review(Model):
-    pass
-
