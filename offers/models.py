@@ -16,6 +16,10 @@ from offers.constants import MAX_LENGTH_CHAR_FIELD, MAX_DISPLAY_SYMBOLS, MAX_LEN
 Profile = get_user_model()
 
 
+class Catalog(Model):
+    pass
+
+
 class Region(Model):
     name = CharField(max_length=MAX_LENGTH_CHAR_FIELD, verbose_name='Название региона')
     code = IntegerField(verbose_name='Код региона', default=0)

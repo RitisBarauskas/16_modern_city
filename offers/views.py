@@ -1,6 +1,8 @@
 from django.views.generic import ListView
+from rest_framework.viewsets import ModelViewSet
 
-from offers.models import City, Offer
+from offers.models import City, Offer, Review
+from offers.serializers import ReviewSerializer
 
 
 class IndexView(ListView):
@@ -20,3 +22,7 @@ class CityListView(ListView):
     def get_queryset(self):
         return City.objects.select_related('region').all()
 
+
+class ReviewViewSet(ModelViewSet):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
