@@ -29,6 +29,19 @@ class Region(Model):
         return self.name
 
 
+class Review(Model):
+    title = CharField(verbose_name='Заголовок', max_length=MAX_LENGTH_CHAR_FIELD)
+    slug = SlugField(verbose_name='Слаг', max_length=MAX_LENGTH_SLUG_FIELD)
+
+    class Meta:
+        verbose_name_plural = 'Отзывы'
+        verbose_name = 'Отзыв'
+        ordering = ['title']
+
+    def __str__(self):
+        return self.title
+
+
 class City(Model):
     name = CharField(max_length=MAX_LENGTH_CHAR_FIELD, verbose_name='Название города')
     population = IntegerField(verbose_name='Население', default=0)
